@@ -1,0 +1,27 @@
+FROM ubuntu:16.04
+
+ENV COTURN_VERSION 4.5.0.6
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    emacs-nox \
+    build-essential \
+    libssl-dev sqlite3 \
+    libsqlite3-dev \
+    libevent-dev \
+    g++ \
+    libboost-dev \
+    libevent-dev \
+    wget
+
+# Get Open vSwitch
+WORKDIR /root/
+RUN wget https://github.com/coturn/coturn/archive/$COTURN_VERSION.tar.gz --no-check-certificate && \
+    tar -xzvf $COTURN_VERSION.tar.gz && \
+    mv coturn-$COTURN_VERSION coturn
+
+WORKDIR /root/coturn
+RUN ./configure && \
+    make && \
+    make install
+
+EXPOSE 3478 

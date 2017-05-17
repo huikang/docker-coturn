@@ -25,3 +25,4 @@ RUN ./configure && \
     make install
 
 EXPOSE 3478 
+EXPOSE 3480

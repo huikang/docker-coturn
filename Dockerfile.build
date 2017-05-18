@@ -24,5 +24,8 @@ RUN ./configure && \
     make && \
     make install
 
-EXPOSE 3478 
-EXPOSE 3480
+EXPOSE 3478/udp
+EXPOSE 3480/udp
+
+EXPOSE 3478/tcp
+EXPOSE 3480/tcp
